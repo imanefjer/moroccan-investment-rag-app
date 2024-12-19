@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment Knowledge Base</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/variables.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Investment Knowledge Base</h1>
+            <p>Ask anything about investing in Morocco</p>
+        </div>
+
+        <div class="input-container">
+            <div class="input-group">
+                <input type="text" id="questionInput" placeholder="Type your question..." autocomplete="off">
+                <button id="submitButton">
+                    <i class="fas fa-paper-plane"></i>
+                    <span>Ask</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="loading">
+            Thinking<span class="dots"></span>
+        </div>
+
+        <div class="result-container" style="display: none;">
+            <div id="answer"></div>
+        </div>
+
+        <div class="controls-container">
+            <button id="toggleSourcesButton" class="secondary-button">
+                <i class="fas fa-link"></i>
+                <span>Show Sources</span>
+            </button>
+            
+            <button id="addUrlButton" class="secondary-button">
+                <i class="fas fa-plus"></i>
+                <span>Add URL</span>
+            </button>
+        </div>
+
+        <div class="sources-list" style="display: none;">
+            <h3>Knowledge Base Sources</h3>
+            <ul id="sourcesList">
+                <!-- Sources will be populated here -->
+            </ul>
+        </div>
+
+        <div class="url-input-group" style="display: none;">
+            <input type="text" id="urlInput" placeholder="Enter URL to add to knowledge base...">
+            <div class="url-actions">
+                <button id="submitUrlButton" class="secondary-button">
+                    <i class="fas fa-check"></i>
+                    <span>Add</span>
+                </button>
+                <button id="cancelUrlButton" class="secondary-button cancel">
+                    <i class="fas fa-times"></i>
+                    <span>Cancel</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script>
+    function addUrl() {
+        const url = document.getElementById('newUrl').value;
+        fetch('/add_url', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ url: url })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                alert(data.error);
+            } else {
+                alert('URL added successfully!');
+                document.getElementById('newUrl').value = '';
+            }
+        })
+        .catch(error => {
+            alert('Error adding URL');
+            console.error('Error:', error);
+        });
+    }
+    </script>
+</body>
+</html> 
