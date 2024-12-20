@@ -67,32 +67,6 @@
             </div>
         </div>
     </div>
-
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
-    <script>
-    function addUrl() {
-        const url = document.getElementById('newUrl').value;
-        fetch('/add_url', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ url: url })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.error) {
-                alert(data.error);
-            } else {
-                alert('URL added successfully!');
-                document.getElementById('newUrl').value = '';
-            }
-        })
-        .catch(error => {
-            alert('Error adding URL');
-            console.error('Error:', error);
-        });
-    }
-    </script>
 </body>
 </html> 

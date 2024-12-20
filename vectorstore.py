@@ -1,11 +1,12 @@
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_ollama import OllamaEmbeddings
-from langchain_chroma import Chroma
+from langchain_community.vectorstores import Chroma
+import os
 
-def create_vectorstore(docs):
+def create_vectorstore(docs, persist_directory="./chroma_db"):
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=500,
-        chunk_overlap=50,
+        chunk_size=1200,
+        chunk_overlap=100,
         add_start_index=True,
         separators=["\n\n", "\n", ".", "!", "?", ",", " ", ""]
     )
@@ -13,7 +14,12 @@ def create_vectorstore(docs):
     
     if all_splits:
         local_embeddings = OllamaEmbeddings(model="all-minilm")
-        vectorstore = Chroma.from_documents(documents=all_splits, embedding=local_embeddings)
+        vectorstore = Chroma.from_documents(
+            documents=all_splits,
+            embedding=local_embeddings,
+            persist_directory=persist_directory
+        )
+        vectorstore.persist()
         return vectorstore
     else:
         print("No content to create vectorstore")

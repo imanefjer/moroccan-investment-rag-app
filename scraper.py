@@ -7,17 +7,20 @@ from io import BytesIO
 from langchain_community.document_loaders import WebBaseLoader
 from langchain_community.document_loaders import PyPDFLoader
 from langchain.schema import Document
+from urllib.parse import urlparse
 os.environ['USER_AGENT'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
 
 def is_allowed_to_scrape(url, user_agent='*'):
-    # Check robots.txt
+    # Extract base URL
+    parsed_url = urlparse(url)
+    base_url = f"{parsed_url.scheme}://{parsed_url.netloc}"
+    
     rp = urllib.robotparser.RobotFileParser()
-    rp.set_url(url + "/robots.txt")
+    rp.set_url(f"{base_url}/robots.txt")
     try:
         rp.read()
         return rp.can_fetch(user_agent, url)
     except:
-        # If robots.txt doesn't exist or can't be read, assume it's allowed
         return True
 
 def is_pdf_url(url):

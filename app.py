@@ -82,6 +82,9 @@ def add_url():
     if not new_url:
         return jsonify({'error': 'No URL provided'}), 400
         
+    if not is_allowed_to_scrape(new_url):
+        return jsonify({'error': 'Scraping not allowed for this URL'}), 403
+    
     # Add the new URL to the list
     urls.append(new_url)
     
@@ -89,11 +92,11 @@ def add_url():
     new_docs = scrape_websites([new_url])
     
     if new_docs:
-        # Add new documents to existing ones
         all_docs.extend(new_docs)
-        # Update vectorstore with all documents
-        vectorstore = create_vectorstore(all_docs)
-        print("vectorstore created url added")
+        # Add new documents to the existing vectorstore
+        vectorstore.add_documents(new_docs)
+        vectorstore.persist()
+        print("Vectorstore updated with the new URL")
         return jsonify({'message': 'URL added and processed successfully'})
     else:
         urls.remove(new_url)  # Remove URL if scraping failed
