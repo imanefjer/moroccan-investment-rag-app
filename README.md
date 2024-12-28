@@ -53,10 +53,10 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-4. Ensure Ollama is running with the Llama2 model:
+4. Ensure Ollama is running with the Llama3.2 model:
 ```bash
-ollama pull llama2
-ollama run llama2
+ollama pull llama3.2
+ollama run llama3.2
 ```
 
 ## Usage
