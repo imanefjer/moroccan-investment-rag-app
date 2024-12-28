@@ -5,11 +5,6 @@ class KnowledgeBase {
         this.answerDiv = document.getElementById('answer');
         this.resultContainer = document.querySelector('.result-container');
         this.loadingDiv = document.querySelector('.loading');
-        this.addUrlButton = document.getElementById('addUrlButton');
-        this.urlInput = document.getElementById('urlInput');
-        this.submitUrlButton = document.getElementById('submitUrlButton');
-        this.cancelUrlButton = document.getElementById('cancelUrlButton');
-        this.urlInputGroup = document.querySelector('.url-input-group');
         this.toggleSourcesButton = document.getElementById('toggleSourcesButton');
         this.sourcesList = document.getElementById('sourcesList');
         this.sourcesListContainer = document.querySelector('.sources-list');
@@ -23,14 +18,6 @@ class KnowledgeBase {
         this.questionInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
                 this.askQuestion();
-            }
-        });
-        this.addUrlButton.addEventListener('click', () => this.toggleUrlInput(true));
-        this.cancelUrlButton.addEventListener('click', () => this.toggleUrlInput(false));
-        this.submitUrlButton.addEventListener('click', () => this.submitUrl());
-        this.urlInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                this.submitUrl();
             }
         });
         this.toggleSourcesButton.addEventListener('click', () => this.toggleSources());
@@ -74,7 +61,6 @@ class KnowledgeBase {
         this.resultContainer.style.display = 'block';
         this.answerDiv.textContent = answer;
         
-        // Animate result container
         setTimeout(() => {
             this.resultContainer.classList.add('visible');
         }, 10);
@@ -91,57 +77,6 @@ class KnowledgeBase {
         if (!isLoading) {
             this.resultContainer.classList.remove('visible');
         }
-    }
-
-    toggleUrlInput(show) {
-        this.urlInputGroup.style.display = show ? 'block' : 'none';
-        if (show) {
-            this.urlInput.value = '';
-            this.urlInput.focus();
-        }
-    }
-
-    async submitUrl() {
-        const url = this.urlInput.value.trim();
-        if (!url) return;
-
-        try {
-            const response = await fetch('/add_url', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ url }),
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                this.showNotification('URL added successfully', 'success');
-                this.toggleUrlInput(false);
-                await this.loadSources();
-            } else {
-                this.showNotification(data.error || 'Failed to add URL', 'error');
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            this.showNotification('An error occurred while adding the URL', 'error');
-        }
-    }
-
-    showNotification(message, type = 'success') {
-        // Create notification element
-        const notification = document.createElement('div');
-        notification.className = `notification ${type}`;
-        notification.textContent = message;
-
-        // Add to document
-        document.body.appendChild(notification);
-
-        // Remove after delay
-        setTimeout(() => {
-            notification.remove();
-        }, 3000);
     }
 
     async loadSources() {
@@ -182,17 +117,14 @@ class KnowledgeBase {
         this.sourcesListContainer.style.display = isVisible ? 'none' : 'block';
         
         if (!isVisible) {
-            // Update icon and text
             this.toggleSourcesButton.innerHTML = `
                 <i class="fas fa-times"></i>
                 <span>Hide Sources</span>
             `;
-            // Add visible class after a small delay for animation
             setTimeout(() => {
                 this.sourcesListContainer.classList.add('visible');
             }, 10);
         } else {
-            // Update icon and text
             this.toggleSourcesButton.innerHTML = `
                 <i class="fas fa-link"></i>
                 <span>Show Sources</span>
@@ -202,7 +134,6 @@ class KnowledgeBase {
     }
 }
 
-// Initialize the application when the DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     new KnowledgeBase();
 });

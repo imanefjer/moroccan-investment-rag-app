@@ -56,7 +56,9 @@ body {
     background-color: var(--input-background);
     transition: all var(--transition-speed) ease;
 }
-
+#answer{
+    white-space: pre-wrap; 
+}
 #questionInput:focus {
     outline: none;
     border-color: var(--primary-color);
@@ -126,85 +128,12 @@ body {
     80%, 100% { content: ''; }
 }
 
-/* Responsive Design */
 @media (max-width: 600px) {
     .input-group {
         flex-direction: column;
     }
 
     #submitButton {
-        width: 100%;
-        justify-content: center;
-    }
-}
-
-/* URL Input Styles */
-.url-container {
-    margin-bottom: var(--spacing-large);
-    padding: var(--spacing-base);
-    border-radius: var(--border-radius);
-    background-color: var(--input-background);
-}
-
-.url-input-group {
-    margin-top: var(--spacing-base);
-}
-
-.url-input-group input {
-    width: 100%;
-    padding: var(--spacing-base);
-    margin-bottom: var(--spacing-base);
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius);
-    font-size: var(--font-size-base);
-    background-color: var(--background-color);
-}
-
-.url-input-group input:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.1);
-}
-
-.url-actions {
-    display: flex;
-    gap: var(--spacing-base);
-}
-
-/* Secondary Button Style */
-.secondary-button {
-    padding: var(--spacing-base);
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius);
-    background-color: var(--background-color);
-    color: var(--text-color);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-small);
-    transition: all var(--transition-speed) ease;
-}
-
-.secondary-button:hover {
-    background-color: var(--hover-color);
-}
-
-.secondary-button.cancel {
-    color: #DC3545;
-    border-color: #DC3545;
-}
-
-.secondary-button.cancel:hover {
-    background-color: #FFF5F5;
-}
-
-/* Add to the existing media queries */
-@media (max-width: 600px) {
-    .url-actions {
-        flex-direction: column;
-    }
-    
-    .secondary-button {
         width: 100%;
         justify-content: center;
     }
@@ -242,7 +171,6 @@ body {
     }
 }
 
-/* Sources Styles */
 .sources-container {
     margin-bottom: var(--spacing-large);
 }
@@ -295,7 +223,6 @@ body {
     color: var(--primary-color);
 }
 
-/* Animation for sources list */
 .sources-list {
     transition: all var(--transition-speed) ease;
     opacity: 0;
@@ -330,19 +257,6 @@ body {
     z-index: 999;
 }
 
-.url-input-group {
-    position: fixed;
-    bottom: 80px;
-    right: 20px;
-    width: 300px;
-    background-color: var(--background-color);
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius);
-    padding: var(--spacing-base);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    z-index: 999;
-}
-
 @media (max-width: 600px) {
     .controls-container {
         bottom: 10px;
@@ -356,5 +270,42 @@ body {
         right: 10px;
         width: calc(100% - 20px);
         max-width: 300px;
+    }
+}
+
+.secondary-button {
+    padding: var(--spacing-base);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-small);
+    transition: all var(--transition-speed) ease;
+}
+
+.secondary-button:hover {
+    background-color: var(--hover-color);
+}
+
+.secondary-button.cancel {
+    color: #DC3545;
+    border-color: #DC3545;
+}
+
+.secondary-button.cancel:hover {
+    background-color: #FFF5F5;
+}
+
+@media (max-width: 600px) {
+    .url-actions {
+        flex-direction: column;
+    }
+    
+    .secondary-button {
+        width: 100%;
+        justify-content: center;
     }
 }

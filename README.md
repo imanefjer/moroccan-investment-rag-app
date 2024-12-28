@@ -5,9 +5,7 @@ The Morocco Investment Knowledge Base is an intelligent web application designed
 
 ### Key Features
 - 🤖 AI-powered question answering about Morocco investment topics
-- 🌐 Dynamic source management with URL addition capability
 - 🔄 Automatic web scraping for content updates (with robots.txt compliance)
-- 📄 PDF document support for comprehensive knowledge base
 - 💻 User-friendly interface with responsive design
 - 🔍 Source transparency with viewable reference links
 - 🤝 Ethical web scraping with robots.txt verification
@@ -26,7 +24,6 @@ The Morocco Investment Knowledge Base is an intelligent web application designed
 - HTML5
 - CSS3
 - Vanilla JavaScript
-- Font Awesome Icons
 - Inter Font Family
 
 ## Installation
@@ -66,7 +63,8 @@ ollama run llama2
 
 1. Start the Flask application:
 ```bash
-python app.py
+export FLASK_ENV=development
+flask run
 ```
 
 2. Open your web browser and navigate to:
@@ -78,24 +76,15 @@ http://localhost:5000
 - Type your investment-related question in the input field
 - Click "Ask" or press Enter to submit
 - View the AI-generated response based on the knowledge base
-- Add new sources using the "Add URL" button
 - View current sources using the "Show Sources" button
 
-## Configuration
 
-### Environment Variables
-Create a `.env` file in the project root with the following variables:
-```
-OLLAMA_BASE_URL=http://localhost:11434
-CHROMA_PERSIST_DIRECTORY=./chroma_db
-```
 ## Project Structure
 
 ### Key Components
 - `app.py`: Main Flask application and API endpoints
 - `scraper.py`: Web scraping functionality
 - `vectorstore.py`: Vector database management
-- `pdf_loader.py`: PDF document processing
 - `templates/`: HTML templates
 - `static/`: CSS, JavaScript, and other static assets
 
@@ -108,6 +97,4 @@ CHROMA_PERSIST_DIRECTORY=./chroma_db
 
 2. **Manage Sources**:
    - Click "Show Sources" to view current knowledge base sources
-   - Use "Add URL" to expand the knowledge base with new sources
-   - The system automatically checks robots.txt before scraping any new URLs
    - View source links for transparency

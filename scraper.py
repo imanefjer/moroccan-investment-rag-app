@@ -5,7 +5,6 @@ import requests
 from PyPDF2 import PdfReader
 from io import BytesIO
 from langchain_community.document_loaders import WebBaseLoader
-from langchain_community.document_loaders import PyPDFLoader
 from langchain.schema import Document
 from urllib.parse import urlparse
 os.environ['USER_AGENT'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
@@ -36,7 +35,7 @@ def scrape_pdf(url):
         for page in pdf.pages:
             text += page.extract_text()
             
-        # Create a document with the PDF content
+        # Create a document 
         return [Document(
             page_content=text,
             metadata={"source": url}

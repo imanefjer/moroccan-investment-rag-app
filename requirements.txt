@@ -8,3 +8,4 @@ urllib3
 chromadb
 python-dotenv
 unstructured
+sentence-transformers

@@ -19,7 +19,6 @@ def create_vectorstore(docs, persist_directory="./chroma_db"):
             embedding=local_embeddings,
             persist_directory=persist_directory
         )
-        vectorstore.persist()
         return vectorstore
     else:
         print("No content to create vectorstore")

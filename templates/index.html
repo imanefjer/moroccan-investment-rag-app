@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Investment Knowledge Base</title>
+    <title>Invest in Morocco: Your Guide</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/variables.css') }}">
@@ -12,7 +12,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>Investment Knowledge Base</h1>
+            <h1>Invest in Morocco: Your Guide</h1>
             <p>Ask anything about investing in Morocco</p>
         </div>
 
@@ -31,7 +31,7 @@
         </div>
 
         <div class="result-container" style="display: none;">
-            <div id="answer"></div>
+            <pre id="answer"></pre>
         </div>
 
         <div class="controls-container">
@@ -40,10 +40,6 @@
                 <span>Show Sources</span>
             </button>
             
-            <button id="addUrlButton" class="secondary-button">
-                <i class="fas fa-plus"></i>
-                <span>Add URL</span>
-            </button>
         </div>
 
         <div class="sources-list" style="display: none;">
@@ -51,20 +47,6 @@
             <ul id="sourcesList">
                 <!-- Sources will be populated here -->
             </ul>
-        </div>
-
-        <div class="url-input-group" style="display: none;">
-            <input type="text" id="urlInput" placeholder="Enter URL to add to knowledge base...">
-            <div class="url-actions">
-                <button id="submitUrlButton" class="secondary-button">
-                    <i class="fas fa-check"></i>
-                    <span>Add</span>
-                </button>
-                <button id="cancelUrlButton" class="secondary-button cancel">
-                    <i class="fas fa-times"></i>
-                    <span>Cancel</span>
-                </button>
-            </div>
         </div>
     </div>
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
