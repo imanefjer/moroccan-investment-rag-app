@@ -5,3 +5,4 @@ chroma_db/
 .env
 .vscode/
 *.swp
+Report.pdf
