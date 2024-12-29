@@ -23,7 +23,7 @@ The Morocco Investment Knowledge Base is an intelligent web application designed
 ### Frontend
 - HTML5
 - CSS3
-- Vanilla JavaScript
+- Vanilla JavaScript/Users/imanefjer/Desktop/moroccan-investment-rag-app
 - Inter Font Family
 
 ## Installation
